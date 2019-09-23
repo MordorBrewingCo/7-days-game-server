@@ -1,6 +1,6 @@
 # 7 Days to Die game server
 
-![7 Days to Die dedicated IaC server](media/Rust.jpg)
+![7 Days to Die dedicated IaC server](media/7-days.jpg)
 
 <h2>Terraform IaC for dedicated 7 Days to Die game server in AWS utilizing EC2 and didstopia/rust-server Docker container</h2>
 
