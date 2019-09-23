@@ -8,5 +8,5 @@
 
 <p>This repository is intended for use with Terraform and TravisCI to provision a soup to nuts framework for a 7 Days to Die game server in AWS and to utilize infrastructure as code with negligible configuration.  The philosophy of use here is to use minimal infrastructure to keep costs down for the average gamer, yet still maintain powerful flexibility and to create a framework for which other game servers can be provisioned.</p>
 
-Thanks to [Frank Rosner's article](https://dev.to/frosnerd/continuous-delivery-on-aws-with-terraform-and-travis-ci-3914) for the basis of the CI component and [Didstopia's 7dtd Docker container] (https://github.com/Didstopia/7dtd-server).
+Thanks to [Frank Rosner's article](https://dev.to/frosnerd/continuous-delivery-on-aws-with-terraform-and-travis-ci-3914) for the basis of the CI component and [Didstopia's 7dtd Docker container](https://github.com/Didstopia/7dtd-server).
 
