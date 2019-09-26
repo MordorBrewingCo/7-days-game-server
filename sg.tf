@@ -1,16 +1,16 @@
 resource "aws_security_group" "rust" {
   name = "rust"
-  description = "Rust Server EC2 Security Group"
+  description = "7dtd Server EC2 Security Group"
   ingress {
-    from_port = 28015
-    to_port = 28016
-    protocol = "tcp"
+    from_port = 25000
+    to_port = 25003
+    protocol = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port = 28015
-    to_port = 28016
-    protocol = "udp"
+    from_port = 26900
+    to_port = 26900
+    protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
@@ -22,6 +22,13 @@ resource "aws_security_group" "rust" {
   ingress {
     from_port = 8080
     to_port = 8080
+    protocol = "tcp"
+#    cidr_blocks = ["173.87.32.128/25", "98.10.111.0/25", "206.251.217.0/24"]
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 8082
+    to_port = 8082
     protocol = "tcp"
 #    cidr_blocks = ["173.87.32.128/25", "98.10.111.0/25", "206.251.217.0/24"]
     cidr_blocks = ["0.0.0.0/0"]
