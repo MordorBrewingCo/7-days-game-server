@@ -22,7 +22,7 @@ sudo apt-get install curl -y
 EC2_INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-id || die \"wget instance-id has failed: $?\")
 EC2_AVAIL_ZONE=$(wget -q -O - http://169.254.169.254/latest/meta-data/placement/availability-zone || die \"wget availability-zone has failed: $?\")
 EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
-DIRECTORY=/steamcmd/rust
+DIRECTORY=/steamcmd/7dtd
 MYKEY=rust
 
 #############
@@ -87,22 +87,14 @@ sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 28015
-sudo ufw allow 28015/udp
+sudo ufw allow 25000/udp
 sudo ufw allow 28016
 sudo ufw allow 8080
 sudo ufw enable
 
 cat > /rust.env <<- "EOF"
-RUST_SERVER_STARTUP_ARGUMENTS="-batchmode -load -logfile /dev/stdout +server.secure 1"
-RUST_SERVER_IDENTITY="Fragtopia"
-RUST_SERVER_SEED="4983"
-RUST_SERVER_NAME="Fragtopia Rust"
-RUST_SERVER_DESCRIPTION="Fragtopia Rust"
-RUST_RCON_PASSWORD="ReplaceMe!"
-
-RUST_SERVER_WORLDSIZE="2000"
-RUST_SERVER_MAXPLAYERS="100"
-RUST_SERVER_DESCRIPTION="Fragtopia: Carebear-ish"
+SEVEN_DAYS_TO_DIE_SERVER_STARTUP_ARGUMENTS="-logfile /dev/stdout -quit -batchmode -nographics -dedicated"
+SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE RUST.ENV
@@ -111,4 +103,3 @@ sed -i "s/ReplaceMe!/$PASSWORD/g" /rust.env
 
 # START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
 #docker run --name rust-server didstopia/rust-server
-docker run --name rust-server -d -p 28015:28015 -p 28015:28015/udp -p 28016:28016 -p 8080:8080 -v /rust:/steamcmd/rust --env-file /rust.env didstopia/rust-server
