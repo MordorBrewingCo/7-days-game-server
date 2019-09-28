@@ -32,6 +32,10 @@ resource "aws_instance" "game" {
     volume_type = "gp2"
     delete_on_termination = false
   } */
+  provisioner "file" {
+  source      = "templates/serverconfig.xml"
+  destination = "/serverconfig.xml"
+  }
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
   iam_instance_profile = "${aws_iam_instance_profile.ec2_describe_volumes_profile.name}"

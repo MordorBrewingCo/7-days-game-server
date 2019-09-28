@@ -96,6 +96,9 @@ SEVEN_DAYS_TO_DIE_SERVER_STARTUP_ARGUMENTS="-logfile /dev/stdout -quit -batchmod
 SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
 
+# copy our serverconfig.xml provisioned by Terraform to our newly mounted persistent EBS volume
+cp /serverconfig.xml /steamcmd/7dtd/serverconfig.xml
+
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE 7dtd.env
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
 sed -i "s/ReplaceMe!/$PASSWORD/g" /steamcmd/7dtd/serverconfig.xml
