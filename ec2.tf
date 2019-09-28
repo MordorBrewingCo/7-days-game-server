@@ -25,6 +25,10 @@ data "template_file" "user_data" {
   }
 }
 
+data "template_file" "server_config" {
+  template = file("templates/serverconfig.xml")
+}
+
 resource "aws_instance" "game" {
 /*  ebs_block_device {
     device_name = "/dev/sdh"
@@ -33,7 +37,7 @@ resource "aws_instance" "game" {
     delete_on_termination = false
   } */
   provisioner "file" {
-  source      = "templates/serverconfig.xml"
+  source      = "${data.template_file.server_config.rendered}"
   destination = "/serverconfig.xml"
   }
   ami               = data.aws_ami.ubuntu.id
