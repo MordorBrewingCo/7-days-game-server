@@ -86,9 +86,8 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw allow 28015
-sudo ufw allow 25000/udp
-sudo ufw allow 28016
+sudo ufw allow 25000:25003/udp
+sudo ufw allow 26900
 sudo ufw allow 8080
 sudo ufw enable
 
@@ -99,7 +98,7 @@ EOF
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE 7dtd.env
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
-sed -i "s/ReplaceMe!/$PASSWORD/g" /7dtd.env
+sed -i "s/ReplaceMe!/$PASSWORD/g" /steamcmd/7dtd/serverconfig.xml
 
 # START THE 7DTD CONTAINER.  DOWNLOADS LATEST 7DTD-SERVER IMAGE FROM DOCKER HUB
-docker run --name 7dtd-server didstopia/7dtd-server
+docker run --name 7dtd-server --env-file /7dtd.env didstopia/7dtd-server
