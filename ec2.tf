@@ -26,7 +26,7 @@ data "template_file" "user_data" {
 }
 
 data "template_file" "server_config" {
-  template = file("templates/serverconfig.xml")
+  template = file("templates/serverconfig.xml.tpl")
 }
 
 resource "aws_instance" "game" {
