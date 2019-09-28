@@ -28,7 +28,7 @@ MYKEY=7dtd
 #############
 # EBS VOLUME
 #
-# note: /dev/sdh => /dev/xvdh
+# note: /dev/sdf => /dev/xvdf
 # see: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html
 #############
 
@@ -39,7 +39,7 @@ until [[ $DATA_STATE == "attached" ]]; do
 	    --region $${EC2_REGION} \
 	    --filters \
 	        Name=attachment.instance-id,Values=$${EC2_INSTANCE_ID} \
-	        Name=attachment.device,Values=/dev/sdh \
+	        Name=attachment.device,Values=/dev/sdf \
 	    --query Volumes[].Attachments[].State \
 	    --output text)
 	echo 'waiting for volume...'
@@ -48,10 +48,10 @@ done
 
 echo 'EBS volume attached!'
 
-# Format /dev/xvdh if it does not contain a partition yet
+# Format /dev/xvdf if it does not contain a partition yet
 
-if [ "$(file -b -s /dev/xvdh)" == "data" ]; then
-  mkfs -t ext4 /dev/xvdh
+if [ "$(file -b -s /dev/xvdf)" == "data" ]; then
+  mkfs -t ext4 /dev/xvdf
 fi
 
 
@@ -68,7 +68,7 @@ if grep -qs "$DIRECTORY" /proc/mounts; then
   echo "Persistent filesystem already mounted."
 else
   echo "Persistent filesystem not mounted."
-  mount /dev/xvdh "$DIRECTORY"
+  mount /dev/xvdf "$DIRECTORY"
   if [ $? -eq 0 ]; then
    echo "Mount success!"
   else

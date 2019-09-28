@@ -30,12 +30,6 @@ data "template_file" "server_config" {
 }
 
 resource "aws_instance" "game" {
-/*  ebs_block_device {
-    device_name = "/dev/sdh"
-    volume_size = 10
-    volume_type = "gp2"
-    delete_on_termination = false
-  } */
   provisioner "file" {
   content      = "${data.template_file.server_config.rendered}"
   destination = "/serverconfig.xml"
