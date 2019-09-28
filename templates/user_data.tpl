@@ -34,7 +34,7 @@ MYKEY=7dtd
 
 # wait for EBS volume to attach
 DATA_STATE="unknown"
-until [ $DATA_STATE == "attached" ]; do
+until [[ $DATA_STATE == "attached" ]]; do
 	DATA_STATE=$(aws ec2 describe-volumes \
 	    --region $${EC2_REGION} \
 	    --filters \
