@@ -1,4 +1,4 @@
-gameDescription: Contains a IAM user, S3 bucket for Terraform state, and locking table for use with CI deployment.
+Description: Contains a IAM user, S3 bucket for Terraform state, and locking table for use with CI deployment.
 Parameters:
   HashKeyElementName:
     Description: HashType PrimaryKey Name
