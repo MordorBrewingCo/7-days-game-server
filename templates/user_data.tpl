@@ -92,7 +92,7 @@ sudo ufw allow 28016
 sudo ufw allow 8080
 sudo ufw enable
 
-cat > /game.env <<- "EOF"
+cat > /7dtd.env <<- "EOF"
 SEVEN_DAYS_TO_DIE_SERVER_STARTUP_ARGUMENTS="-logfile /dev/stdout -quit -batchmode -nographics -dedicated"
 SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
@@ -102,4 +102,4 @@ export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parame
 sed -i "s/ReplaceMe!/$PASSWORD/g" /7dtd.env
 
 # START THE 7DTD CONTAINER.  DOWNLOADS LATEST 7DTD-SERVER IMAGE FROM DOCKER HUB
-#docker run --name 7dtd-server didstopia/7dtd-server
+docker run --name 7dtd-server didstopia/7dtd-server
