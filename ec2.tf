@@ -37,7 +37,7 @@ resource "aws_instance" "game" {
     delete_on_termination = false
   } */
   provisioner "file" {
-  source      = "${data.template_file.server_config.rendered}"
+  content      = "${data.template_file.server_config.rendered}"
   destination = "/serverconfig.xml"
   }
   ami               = data.aws_ami.ubuntu.id
