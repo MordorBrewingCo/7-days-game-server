@@ -11,7 +11,7 @@
 
 	<!-- Networking -->
 	<property name="ServerPort"						value="26900"/>				<!-- Port you want the server to listen on. -->
-	<property name="ServerVisibility"				value="1"/>					<!-- Visibility of this server: 2 = public, 1 = only shown to friends, 0 = not listed. As you are never friend of a dedicated server setting this to "1" will only work when the first player connects manually by IP. -->
+	<property name="ServerVisibility"				value="2"/>					<!-- Visibility of this server: 2 = public, 1 = only shown to friends, 0 = not listed. As you are never friend of a dedicated server setting this to "1" will only work when the first player connects manually by IP. -->
 	<property name="ServerDisabledNetworkProtocols"	value="SteamNetworking"/>	<!-- Networking protocols that should not be used. Separated by comma. Possible values: LiteNetLib, SteamNetworking. Dedicated servers should disable SteamNetworking if there is no NAT router in between your users and the server or when port-forwarding is set up correctly -->
 
 	<!-- Slots -->
