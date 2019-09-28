@@ -55,7 +55,7 @@ if [ "$(file -b -s /dev/xvdh)" == "data" ]; then
 fi
 
 
-# Create the 7dtd directory on our EC2 instance if it doesn't exist
+# Create the game directory on our EC2 instance if it doesn't exist
 
 if [ ! -d "$DIRECTORY" ]; then
   mkdir -p $DIRECTORY
@@ -92,7 +92,7 @@ sudo ufw allow 28016
 sudo ufw allow 8080
 sudo ufw enable
 
-cat > /7dtd.env <<- "EOF"
+cat > /game.env <<- "EOF"
 SEVEN_DAYS_TO_DIE_SERVER_STARTUP_ARGUMENTS="-logfile /dev/stdout -quit -batchmode -nographics -dedicated"
 SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF

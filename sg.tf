@@ -1,6 +1,6 @@
-resource "aws_security_group" "7dtd" {
-  name = "7dtd"
-  description = "7dtd Server EC2 Security Group"
+resource "aws_security_group" "game" {
+  name = "game"
+  description = "game Server EC2 Security Group"
   ingress {
     from_port = 25000
     to_port = 25003
