@@ -10,20 +10,20 @@ variable "aws_region" {
 
 variable "tf_state_key" {
   type    = string
-  default = "rust-server.tfstate"
+  default = "7dtd-server.tfstate"
 }
 
 variable "backend_bucket_name" {
   type    = string
-  default = "rust-fragtopia-us-west-2-389684724582-terraform"
+  default = "7dtd-fragtopia-us-west-2-389684724582-terraform"
 }
 
 variable "backend_table_name" {
   type    = string
-  default = "rust-fragtopia-locktable"
+  default = "7dtd-fragtopia-locktable"
 }
 
 variable "ssm_parameter_rcon_pass_path" {
   type    = string
-  default = "/rust"
+  default = "/7dtd"
 }

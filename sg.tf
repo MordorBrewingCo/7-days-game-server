@@ -1,5 +1,5 @@
-resource "aws_security_group" "rust" {
-  name = "rust"
+resource "aws_security_group" "7dtd" {
+  name = "7dtd"
   description = "7dtd Server EC2 Security Group"
   ingress {
     from_port = 25000

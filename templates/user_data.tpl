@@ -23,7 +23,7 @@ EC2_INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-
 EC2_AVAIL_ZONE=$(wget -q -O - http://169.254.169.254/latest/meta-data/placement/availability-zone || die \"wget availability-zone has failed: $?\")
 EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
 DIRECTORY=/steamcmd/7dtd
-MYKEY=rust
+MYKEY=7dtd
 
 #############
 # EBS VOLUME
@@ -55,7 +55,7 @@ if [ "$(file -b -s /dev/xvdh)" == "data" ]; then
 fi
 
 
-# Create the Rust directory on our EC2 instance if it doesn't exist
+# Create the 7dtd directory on our EC2 instance if it doesn't exist
 
 if [ ! -d "$DIRECTORY" ]; then
   mkdir -p $DIRECTORY
@@ -92,14 +92,14 @@ sudo ufw allow 28016
 sudo ufw allow 8080
 sudo ufw enable
 
-cat > /rust.env <<- "EOF"
+cat > /7dtd.env <<- "EOF"
 SEVEN_DAYS_TO_DIE_SERVER_STARTUP_ARGUMENTS="-logfile /dev/stdout -quit -batchmode -nographics -dedicated"
 SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
 
-# RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE RUST.ENV
+# RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE 7dtd.env
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
-sed -i "s/ReplaceMe!/$PASSWORD/g" /rust.env
+sed -i "s/ReplaceMe!/$PASSWORD/g" /7dtd.env
 
-# START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
-#docker run --name rust-server didstopia/rust-server
+# START THE 7DTD CONTAINER.  DOWNLOADS LATEST 7DTD-SERVER IMAGE FROM DOCKER HUB
+#docker run --name 7dtd-server didstopia/7dtd-server
