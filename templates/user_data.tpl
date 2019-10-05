@@ -88,7 +88,7 @@ sudo ufw allow http
 sudo ufw allow https
 sudo ufw allow 26900
 sudo ufw allow 26900:26902/udp
-sudo ufw allow 8080:8081
+sudo ufw allow 8080:8081/tcp
 sudo ufw enable
 
 cat > /7dtd.env <<- "EOF"
