@@ -2,11 +2,6 @@
   region = "us-west-2"
 }*/
 
-locals {
-  # Ids for multiple sets of EC2 instances, merged together
-  server_config_path = "/serverconfig.xml"
-}
-
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -28,15 +23,6 @@ data "template_file" "user_data" {
   vars = {
     ssm_parameter_path = var.ssm_parameter_rcon_pass_path
   }
-}
-
-data "template_file" "server_config" {
-  template = file("templates/serverconfig.xml.tpl")
-}
-
-resource "local_file" "server_config" {
-  content = "${data.template_file.server_config.rendered}"
-  filename = "${local.server_config_path}"
 }
 
 resource "aws_instance" "game" {
