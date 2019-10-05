@@ -36,7 +36,6 @@ resource "aws_instance" "game" {
   }
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
-  depends_on  = ["aws_ebs_volume.game_persistent"]
   iam_instance_profile = aws_iam_instance_profile.ec2_describe_volumes_profile.name
   key_name          = "bbulla"
   vpc_security_group_ids = [aws_security_group.game.id]
