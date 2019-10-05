@@ -86,9 +86,9 @@ sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw allow 25000:25003/udp
 sudo ufw allow 26900
-sudo ufw allow 8080
+sudo ufw allow 26900:26902/udp
+sudo ufw allow 8080:8081
 sudo ufw enable
 
 cat > /7dtd.env <<- "EOF"
@@ -97,7 +97,7 @@ SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
 
 # copy our serverconfig.xml provisioned by Terraform to our newly mounted persistent EBS volume
-cp /serverconfig.xml /steamcmd/7dtd/serverconfig.xml
+cp -f /serverconfig.xml /steamcmd/7dtd/serverconfig.xml
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE 7dtd.env
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")

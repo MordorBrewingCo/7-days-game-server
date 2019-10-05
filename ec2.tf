@@ -2,6 +2,11 @@
   region = "us-west-2"
 }*/
 
+locals {
+  # Ids for multiple sets of EC2 instances, merged together
+  server_config_path = "/serverconfig.xml"
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -29,11 +34,22 @@ data "template_file" "server_config" {
   template = file("templates/serverconfig.xml.tpl")
 }
 
+resource "local_file" "server_config" {
+  content = "${data.template_file.server_config.rendered}"
+  filename = "${local.server_config_path}"
+}
+
+resource "null_resource" "run" {
+  triggers {
+    file = "${data.template_file.server_config.rendered}"
+  }
+}
+
 resource "aws_instance" "game" {
-  provisioner "file" {
+  /*provisioner "file" {
   content      = data.template_file.server_config.rendered
   destination = "/serverconfig.xml"
-  }
+  } */
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
   iam_instance_profile = aws_iam_instance_profile.ec2_describe_volumes_profile.name
