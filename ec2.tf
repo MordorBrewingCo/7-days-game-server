@@ -39,12 +39,6 @@ resource "local_file" "server_config" {
   filename = "${local.server_config_path}"
 }
 
-resource "null_resource" "run" {
-  triggers {
-    file = "${data.template_file.server_config.rendered}"
-  }
-}
-
 resource "aws_instance" "game" {
   /*provisioner "file" {
   content      = data.template_file.server_config.rendered
