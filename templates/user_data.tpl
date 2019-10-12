@@ -91,7 +91,7 @@ sudo ufw allow 26900:26902/udp
 sudo ufw allow 8080:8081/tcp
 sudo ufw enable
 
-cat > /7dtd/serverconfig.xml <<- "EOF"
+cat > /serverconfig.xml <<- "EOF"
 <?xml version="1.0"?>
 <ServerSettings>
 	<!-- GENERAL SERVER SETTINGS -->
