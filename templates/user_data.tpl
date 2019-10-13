@@ -225,4 +225,4 @@ sed -i "s/ReplaceMe!/$PASSWORD/g" /7dtd/serverconfig.xml
 #docker run --name 7dtd-server -d -p 26900-26902:26900-26902/udp -p 26900:26900 -p 8080:8080 -v /7dtd:/steamcmd/7dtd --env-file /7dtd.env didstopia/7dtd-server
 #docker run -p 26900:26900/tcp -p 26900:26900/udp -p 26901:26901/udp -p 26902:26902/udp -p 8081:8081/tcp -e SEVEN_DAYS_TO_DIE_UPDATE_CHECKING="1" -v $(pwd)/7dtd_data/game:/steamcmd/7dtd -v $(pwd)/7dtd_data/data:/root/.local/share/7DaysToDie --name 7dtd-server -it --rm didstopia/7dtd-server:latest
 
-docker run -p 26900:26900/tcp -p 26900:26900/udp -p 26901:26901/udp -p 26902:26902/udp -p 8081:8081/tcp -e SEVEN_DAYS_TO_DIE_UPDATE_CHECKING="1" -v /7dtd:/steamcmd/7dtd -v /7dtd:/root/.local/share/7DaysToDie --name 7dtd-server -it --rm didstopia/7dtd-server:latest
+docker run -d -p 26900:26900/tcp -p 26900:26900/udp -p 26901:26901/udp -p 26902:26902/udp -p 8081:8081/tcp -e SEVEN_DAYS_TO_DIE_UPDATE_CHECKING="1" -v /7dtd:/steamcmd/7dtd -v /7dtd:/root/.local/share/7DaysToDie --name 7dtd-server --rm didstopia/7dtd-server:latest
