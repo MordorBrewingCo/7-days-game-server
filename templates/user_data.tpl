@@ -215,7 +215,7 @@ SEVEN_DAYS_TO_DIE_CONFIG_FILE="/steamcmd/7dtd/serverconfig.xml"
 EOF
 
 # copy our serverconfig.xml provisioned by Terraform to our newly mounted persistent EBS volume
-cp -f /serverconfig.xml /steamcmd/7dtd/serverconfig.xml
+cp -f /serverconfig.xml /7dtd/serverconfig.xml
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE 7dtd.env
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
